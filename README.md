@@ -5,7 +5,6 @@
 
 ## Bugs
 
- - Sometimes, when it is introduced a big number of days, the calendar headers shows repeated month names.
 
 ## Things to do 
 

@@ -14,6 +14,7 @@ class calendar {
 function makeCalendar(){
 	$( "#cale" ).empty();
 	var startDate = new Date($( '#startDate' ).val());
+	var month = startDate.getMonth();
 	var days = $( '#days' ).val();
 	var cc = $( '#countryCode' ).val();
 	var firstDayofMonth = new Date(startDate.getFullYear(), startDate.getMonth(), 1);
@@ -32,22 +33,22 @@ function makeCalendar(){
 	function fillCalendar(){
 		let cal = new calendar();
 		let lastDayofMonth = new Date(startDate.getFullYear(), startDate.getMonth() + 1, 0);
-		let daysOfMonth = startDate.getUTCDate();
+		let daysOfMonth = startDate.getDate();
 		let td = 0; 
 
 
-		for (var j = startDate.getUTCDay(); j < 7; j++) {
-			if (parseInt(days) <= 0 || daysOfMonth > lastDayofMonth.getUTCDate()) { break };
+		for (var j = startDate.getDay(); j < 7; j++) {
+			if (parseInt(days) <= 0 || daysOfMonth > lastDayofMonth.getDate()) { break };
 			cal[1][j] = daysOfMonth++ ;
 
 			days--;
 			td++;
 		}
-		if (parseInt(days) > 0 || daysOfMonth >= lastDayofMonth.getUTCDate()) {
+		if (parseInt(days) > 0 || daysOfMonth >= lastDayofMonth.getDate()) {
 			loop:
 				for (var i = 2; i < 7; i++) {
 					for (var j = 0; j < 7; j++) {
-						if ( parseInt(days) <= 0 || daysOfMonth > lastDayofMonth.getUTCDate()) { break loop}
+						if ( parseInt(days) <= 0 || daysOfMonth > lastDayofMonth.getDate()) { break loop}
 						cal[i][j] = daysOfMonth++ ;
 						days--;
 						td++;
@@ -55,7 +56,7 @@ function makeCalendar(){
 				}
 		}
 		startDate = addDays(startDate,parseInt(td));
-		let header = months[startDate.getMonth()] +' '+startDate.getFullYear(); 
+		let header = months[month++] +' '+startDate.getFullYear(); 
 		var result = cal.filter(function(element) {return element.join("") != ""});
 		arrayToTable(result,header)
 	
