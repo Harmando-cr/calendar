@@ -12,6 +12,7 @@ class calendar {
 }
 
 function makeCalendar(){
+	$( "#cale" ).empty();
 	var startDate = new Date($( '#startDate' ).val());
 	var days = $( '#days' ).val();
 	var cc = $( '#countryCode' ).val();
@@ -55,7 +56,8 @@ function makeCalendar(){
 		}
 		startDate = addDays(startDate,parseInt(td));
 		let header = months[startDate.getMonth()] +' '+startDate.getFullYear(); 
-		arrayToTable(cal,header)
+		var result = cal.filter(function(element) {return element.join("") != ""});
+		arrayToTable(result,header)
 	
 
 
