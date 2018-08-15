@@ -35,7 +35,7 @@ function makeCalendar(){
 		let lastDayofMonth = new Date(startDate.getFullYear(), startDate.getMonth() + 1, 0);
 		let daysOfMonth = startDate.getDate();
 		let td = 0; 
-
+		console.log('ULTIMO DIA DEL MES DE '+months[month] +' ES:'+lastDayofMonth.getDate() );
 
 		for (var j = startDate.getDay(); j < 7; j++) {
 			if (parseInt(days) <= 0 || daysOfMonth > lastDayofMonth.getDate()) { break };
@@ -44,7 +44,7 @@ function makeCalendar(){
 			days--;
 			td++;
 		}
-		if (parseInt(days) > 0 || daysOfMonth >= lastDayofMonth.getDate()) {
+		if (parseInt(days) > 0 || daysOfMonth > lastDayofMonth.getDate()) {
 			loop:
 				for (var i = 2; i < 7; i++) {
 					for (var j = 0; j < 7; j++) {
@@ -57,6 +57,9 @@ function makeCalendar(){
 		}
 		startDate = addDays(startDate,parseInt(td));
 		let header = months[month++] +' '+startDate.getFullYear(); 
+		if (month == 12) {
+			month = 0;
+		}
 		var result = cal.filter(function(element) {return element.join("") != ""});
 		arrayToTable(result,header)
 	
